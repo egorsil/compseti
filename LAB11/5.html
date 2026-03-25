@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ползунок</title>
+    <script>
+        function sizePic() {
+            // Получаем значение из ползунка
+            let size = document.getElementById("size").value;
+            // Находим картинку
+            let img = document.getElementById("pic");
+            // Меняем ширину картинки по формуле
+            img.width = 60 + 80 * size;
+        }
+    </script>
+</head>
+<body>
+    <p>Размер рисунка:
+        <input type="range" min="1" max="5" id="size" oninput="sizePic()" value="3">
+    </p>
+
+    <p>
+        <img src="logo.gif" alt="Картинка" id="pic" width="300">
+    </p>
+</body>
+</html>

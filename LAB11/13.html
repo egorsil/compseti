@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Современная форма</title>
+    <style>
+        /* Контейнер для формы */
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap; /* Позволяет блокам переноситься на новую строку */
+            gap: 20px;       /* Отступы между блоками */
+            max-width: 500px;
+        }
+
+        /* Стили для каждого блока поля */
+        fieldset {
+            flex: 1 1 200px; /* Базовая ширина 200px, может растягиваться */
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 0;
+        }
+
+        p { margin: 0 0 10px 0; }
+        input, select { width: 100%; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+<form class="form-grid">
+    <!-- Порядок в HTML соответствует логике заполнения -->
+
+    <fieldset>
+        <p><strong>Имя:</strong></p>
+        <p><input name="name" type="text" placeholder="Введите имя"></p>
+    </fieldset>
+
+    <fieldset>
+        <p><strong>Телефон:</strong></p>
+        <p><input name="tel" type="tel" placeholder="+7 (___) ___"></p>
+    </fieldset>
+
+    <fieldset>
+        <p><strong>Фамилия:</strong></p>
+        <p><input name="lastname" type="text" placeholder="Введите фамилию"></p>
+    </fieldset>
+
+    <fieldset>
+        <p><strong>Пол:</strong></p>
+        <p>
+            <select name="gender">
+                <option value="male" selected>Мужской</option>
+                <option value="female">Женский</option>
+            </select>
+        </p>
+    </fieldset>
+</form>
+
+</body>
+</html>
