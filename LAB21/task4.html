@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 4</title>
+</head>
+<body>
+    <input type="number" id="billInput" placeholder="Сумма счёта">
+    <input type="number" id="tipInput" placeholder="Процент чаевых (0-50)">
+    <input type="number" id="peopleInput" value="1" placeholder="Количество человек">
+    <button id="calcBtn">Рассчитать</button>
+
+    <p id="error" style="color: red;"></p>
+    <p id="tipAmount"></p>
+    <p id="totalAmount"></p>
+    <p id="perPersonAmount"></p>
+
+    <script>
+        let button = document.querySelector("#calcBtn");
+        let billInput = document.querySelector("#billInput");
+        let tipInput = document.querySelector("#tipInput");
+        let peopleInput = document.querySelector("#peopleInput");
+        
+        let errorOutput = document.querySelector("#error");
+        let tipOutput = document.querySelector("#tipAmount");
+        let totalOutput = document.querySelector("#totalAmount");
+        let personOutput = document.querySelector("#perPersonAmount");
+
+        button.onclick = function() {
+            errorOutput.textContent = "";
+            tipOutput.textContent = "";
+            totalOutput.textContent = "";
+            personOutput.textContent = "";
+
+            let billValue = billInput.value;
+            let tipValue = tipInput.value;
+            let peopleValue = peopleInput.value;
+
+            if (billValue === "" || tipValue === "" || peopleValue === "") {
+                errorOutput.textContent = "Ошибка: заполните все поля!";
+                return;
+            }
+
+            let bill = Number(billValue);
+            let tipPercent = Number(tipValue);
+            let people = Number(peopleValue);
+
+            if (bill < 0) {
+                errorOutput.textContent = "Ошибка: сумма счёта не может быть меньше 0";
+                return;
+            }
+            if (tipPercent < 0 || tipPercent > 50) {
+                errorOutput.textContent = "Ошибка: процент чаевых должен быть от 0 до 50";
+                return;
+            }
+            if (people < 1) {
+                errorOutput.textContent = "Ошибка: количество человек не может быть меньше 1";
+                return;
+            }
+
+            let tipAmount = bill * (tipPercent / 100);
+            let totalAmount = bill + tipAmount;
+            let perPerson = totalAmount / people;
+
+            if (people > 1) {
+                perPerson = perPerson.toFixed(2);
+            }
+
+            tipOutput.textContent = "Сумма чаевых: " + tipAmount + " рублей";
+            totalOutput.textContent = "Общая сумма: " + totalAmount + " рублей";
+            personOutput.textContent = "Каждый должен заплатить по " + perPerson + " рублей (" + people + " человека)";
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Задание 3</title>
+</head>
+<body>
+    <input type="tel" id="phoneInput" placeholder="Номер телефона">
+    <button id="checkBtn">Проверить номер</button>
+    <p id="message"></p>
+
+    <script>
+        let button = document.querySelector("#checkBtn");
+        let input = document.querySelector("#phoneInput");
+        let output = document.querySelector("#message");
+
+        button.onclick = function() {
+            let phone = input.value;
+
+            if (phone === "") {
+                output.textContent = "Ошибка: номер не пустой";
+                output.style.color = "red";
+                return;
+            }
+
+            let hasPlus = phone.startsWith("+");
+            let cleanedNumber = phone;
+            if (cleanedNumber[0] === "+") {
+                cleanedNumber = cleanedNumber.slice(1);
+            }
+
+            let onlyDigits = true;
+            for (let i = 0; i < cleanedNumber.length; i++) {
+                if (cleanedNumber[i] < "0" || cleanedNumber[i] > "9") {
+                    onlyDigits = false;
+                    break;
+                }
+            }
+
+            if (!onlyDigits) {
+                output.textContent = "Ошибка: номер должен содержать только цифры и плюс в начале";
+                output.style.color = "red";
+                return;
+            }
+
+            let length = phone.length;
+            let isValidFormat = false;
+
+            if (hasPlus && phone[1] === "7" && length === 12) {
+                isValidFormat = true;
+            } else if (!hasPlus && phone[0] === "8" && length === 11) {
+                isValidFormat = true;
+            } else if (!hasPlus && length === 10) {
+                isValidFormat = true;
+            }
+
+            if (isValidFormat) {
+                output.textContent = "Номер телефона верный";
+                output.style.color = "green";
+            } else {
+                output.textContent = "Ошибка: длина номера не соответствует ни одному из трёх форматов";
+                output.style.color = "red";
+            }
+        };
+    </script>
+</body>
+</html>
